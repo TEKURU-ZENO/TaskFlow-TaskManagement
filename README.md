@@ -51,4 +51,26 @@ To deploy TaskFlow, consider using platforms like Vercel, Netlify, or any static
 
 If deploying to Vercel or Netlify, you can add a custom domain via their dashboard settings.
 
+## Scaling Frontend-Backend Integration for Production
+
+To scale TaskFlow for production:
+
+### Frontend:
+- Deploy the frontend separately on Vercel or Netlify with environment variables pointing to your backend API.
+- Use code-splitting and lazy loading (`React.lazy`, `Suspense`) to reduce initial load.
+- Cache static assets with long-lived headers and use a CDN for global asset delivery.
+
+### Backend:
+- Containerize the backend using Docker for environment consistency.
+- Use a process manager like PM2 for node processes and host via Render, Railway, or a managed VPS.
+- Enforce rate limiting, logging, and monitoring using tools like `morgan`, `winston`, and third-party observability services.
+- Move secrets (JWT secret, DB URI) into a secrets manager or use `.env` with strict production permissions.
+
+### Integration:
+- Ensure CORS is configured correctly between frontend and backend.
+- Use HTTPS everywhere (SSL cert via Let's Encrypt or managed hosting).
+- Structure backend with route versioning (e.g., `/api/v1/tasks`) for forward compatibility.
+
+This foundation supports modular growth, API gateway insertion, microservices, or GraphQL in future upgrades.
+
 ---
